@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FeedController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [FeedController::class, 'show'])->name('home');
+
+Route::get('/login', [FeedController::class, 'login'])->name('login');
+Route::get('/signin', [FeedController::class, 'signin'])->name('signin');
