@@ -11,6 +11,8 @@ class FeedController extends Controller
     public function show()
     {
 
+        
+
         return view('home');
 
     }

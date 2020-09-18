@@ -13,13 +13,17 @@
             <img class="profile-picture" src="img/StandardProfile.png">
             <username>MinecraftGanster22</username>
         </div>
-        <div class="song-container">
-            <h2>Big Tingz</h2>
-            <audio controls>
-                <source src="audio/BigTingz.wav">
-            </audio>
-        </div>
+        @include('inc.audioplayer', ['songTitle' => 'Big Tingz'])
+    </article>
 
+    <article class="post">
+
+
+        <div class="user-container">
+            <img class="profile-picture" src="img/StandardProfile.png">
+            <username>SuperSickGuy</username>
+        </div>
+        @include('inc.audioplayer', ['songTitle' => 'Sick Beat'])
     </article>
 </div>
 
