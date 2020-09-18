@@ -14,7 +14,9 @@
 
 @include('inc.topnav')
 
+<main id="content">
 @yield('content')
+</main>
 
 <script src="{{ mix('js/app.js') }}"></script>
 </body>

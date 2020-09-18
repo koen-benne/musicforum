@@ -18,5 +18,8 @@
         "sass": "^1.26.10",
         "sass-loader": "^8.0.2",
         "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "jplayer": "^2.9.2"
     }
 }

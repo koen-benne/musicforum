@@ -1,4 +1,4 @@
-<div id="topnav">
+<header id="topnav">
     <div id="nav-left">
         <a class="active" href=" {{ route('home') }} ">Home</a>
     </div>
@@ -9,4 +9,4 @@
         <a href=" {{ route('login') }} ">Log in</a>
         <a href=" {{ route('signin') }} ">Sign up</a>
     </div>
-</div>
+</header>

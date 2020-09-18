@@ -1,0 +1,45 @@
+#content {
+    width: 100%;
+}
+
+.post-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.post {
+    margin: 10px 0;
+    width: 900px;
+    height: 500px;
+}
+
+.user-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+username {
+    padding: 4px 6px;
+    background-color: #f1f1f1;
+    border-radius: 15px;
+}
+
+.profile-picture {
+    border: solid lightgrey 0.5px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+}
+
+.song-container h2 {
+    font-size: 19px;
+}
+
+.song-container {
+    margin-left: 41px;
+    margin-bottom: 10px;
+    background-color: #f1f1f1;
+}
