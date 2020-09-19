@@ -95,7 +95,6 @@
 
 document.addEventListener("DOMContentLoaded", function (event) {
   var audioPlayers = document.getElementsByTagName('audioplayer');
-  var audioPlayerObjects;
 
   var _loop = function _loop(_i) {
     var music = audioPlayers[_i].getElementsByClassName('music')[0]; // id for audio element
@@ -193,21 +192,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         for (_i = 0; _i < buttonsToPause.length; _i++) {
           var button = buttonsToPause[_i];
-          var audioToPause = button.parentElement.parentElement.parentElement.getElementsByClassName('music')[0];
+          var audioToPause = button.parentElement.parentElement.getElementsByClassName('music')[0];
           audioToPause.pause();
-          button.className = "";
-          button.className = "play-button play";
+          button.classList.remove('pause');
+          button.classList.add('play');
         } // remove play, add pause
 
 
-        playButton.className = "";
-        playButton.className = "play-button pause";
+        playButton.classList.remove('play');
+        playButton.classList.add('pause');
       } else {
         // pause music
         music.pause(); // remove pause, add play
 
-        playButton.className = "";
-        playButton.className = "play-button play";
+        playButton.classList.remove('pause');
+        playButton.classList.add('play');
       }
     } // Gets audio file duration
 

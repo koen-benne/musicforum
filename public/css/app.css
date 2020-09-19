@@ -133,16 +133,17 @@ username {
 }
 
 audiocontrolls {
+  margin-bottom: 13px;
   display: flex;
   align-items: center;
 }
 
 .play {
-  background: #d0d0d0 url(/images/playbutton.png?e97126c887470030332bb84c20af4737) no-repeat center;
+  background: #d7d7d7 url(/images/playbutton.png?e97126c887470030332bb84c20af4737) no-repeat center;
 }
 
 .pause {
-  background: #d0d0d0 url(/images/pausebutton.png?78f43c88481bee28ebfbd47129896401) no-repeat center;
+  background: #d7d7d7 url(/images/pausebutton.png?78f43c88481bee28ebfbd47129896401) no-repeat center;
 }
 
 .play-button {
@@ -170,17 +171,17 @@ audiocontrolls {
 .timeline {
   flex-grow: 1;
   width: 400px;
-  height: 20px;
-  background: #d0d0d0;
+  height: 10px;
+  background: #d7d7d7;
   float: left;
   border-radius: 15px;
 }
 
 .playhead {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  margin-top: 1px;
+  margin-top: -5px;
   background: black;
 }
 

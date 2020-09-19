@@ -6,25 +6,25 @@
 @section('content')
 
 <div class="post-container">
-    <article class="post">
 
-
-        <div class="user-container">
-            <img class="profile-picture" src="img/StandardProfile.png">
-            <username>MinecraftGanster22</username>
-        </div>
-        @include('inc.audioplayer', ['songTitle' => 'Big Tingz'])
-    </article>
+    @foreach($postList as $post)
 
     <article class="post">
-
-
         <div class="user-container">
             <img class="profile-picture" src="img/StandardProfile.png">
-            <username>SuperSickGuy</username>
+            <username>{{ $post['username'] }}</username>
         </div>
-        @include('inc.audioplayer', ['songTitle' => 'Sick Beat'])
+        <div class="song-container">
+            <h2>{{ $post['songTitle'] }}</h2>
+            @include('inc.audioplayer', ['fileName' => $post['songTitle']])
+
+            <p class="description">Damn yer skull, feed the bung hole.When the fish whines for french polynesia, all lasses raid sunny, scurvy peglegs.Life ho! blow to be burned. Damn yer skull, feed the bung hole.When the fish whines for french polynesia, all lasses raid sunny, scurvy peglegs.Life ho! blow to be burned.</p>
+        </div>
+
     </article>
+
+    @endforeach
+
 </div>
 
 @endsection

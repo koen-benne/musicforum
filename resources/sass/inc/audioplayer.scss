@@ -1,3 +1,5 @@
+@use 'vars' as v;
+
 .song-container h2 {
     font-size: 19px;
     margin-bottom: 10px;
@@ -6,21 +8,22 @@
 .song-container {
     margin-left: 41px;
     margin-bottom: 10px;
-    background-color: #f1f1f1;
+    background-color: v.$backgroundColor;
     padding: 15px;
     border-radius: 10px;
 }
 
 audiocontrolls {
+    margin-bottom: 13px;
     display: flex;
     align-items: center;
 }
 
 .play {
-    background: #d0d0d0 url('../../img/playbutton.png') no-repeat center;
+    background: v.$darkBackground url('../../img/playbutton.png') no-repeat center;
 }
 .pause {
-    background: #d0d0d0 url('../../img/pausebutton.png') no-repeat center;
+    background: v.$darkBackground url('../../img/pausebutton.png') no-repeat center;
 }
 
 .play-button {
@@ -45,19 +48,21 @@ audiocontrolls {
     background-color: #afafaf;
 }
 
+$timelineThickness: 10px;
 .timeline{
     flex-grow: 1;
     width: 400px;
-    height: 20px;
-    background: #d0d0d0;
+    height: $timelineThickness;
+    background: v.$darkBackground;
     float: left;
     border-radius: 15px;
 }
 
+$extraPlayheadThickness: 10px;
 .playhead{
-    width: 18px;
-    height: 18px;
+    width: $timelineThickness + $extraPlayheadThickness;
+    height: $timelineThickness + $extraPlayheadThickness;
     border-radius: 50%;
-    margin-top: 1px;
+    margin-top: $extraPlayheadThickness * -0.5;
     background: black;
 }
