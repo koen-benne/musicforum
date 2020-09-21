@@ -15,7 +15,7 @@
             <p class="username">{{ $post->user->name }}</p>
         </div>
         <div class="song-container link-block">
-            <a class="covering-link" href=" {{ route('post', ['id' => $post->id]) }} "></a>
+            <a class="covering-link" href=" {{ route('posts.show', ['post' => $post->id]) }} "></a>
             <h2>{{ $post->title }}</h2>
             @include('inc.audioplayer', ['fileName' => $post->audio_file_name])
 

@@ -1,7 +1,7 @@
 <audioplayer>
 
     <audio class="music" preload="true">
-        <source src="audio/{{ $fileName }}.wav">
+        <source src="/audio/{{ $fileName }}.wav">
     </audio>
 
     <audiocontrolls>

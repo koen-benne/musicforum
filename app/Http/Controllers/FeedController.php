@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use App\NewsItem;
+use Illuminate\Database\Eloquent\Model;
 
 class FeedController extends Controller
 {
@@ -11,10 +13,8 @@ class FeedController extends Controller
     public function show()
     {
 
-        $postList = [
-            ['id' => 1, 'author' => 'CoolPerson22', 'title' => 'Big Tingz'],
-            ['id' => 2, 'author' => 'SuperSickGuy', 'title' => 'Sick Beat'],
-        ];
+        $postList = Post::all();
+
 
         return view('home', ['postList' => $postList]);
 
@@ -36,19 +36,8 @@ class FeedController extends Controller
 
     public function post($id) {
 
-        $postList = [
-            ['id' => 1, 'author' => 'CoolPerson22', 'title' => 'Big Tingz'],
-            ['id' => 2, 'author' => 'SuperSickGuy', 'title' => 'Sick Beat'],
-        ];
 
-        $post = null;
-
-        foreach ($postList as $currentPost) {
-            if ($currentPost['id'] == $id) {
-                $post = $currentPost;
-                break;
-            }
-        }
+        $post = Post::all()->find($id);
 
         return view('post', ['post' => $post]);
 

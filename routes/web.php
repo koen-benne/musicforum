@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FeedController;
+use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,4 +21,5 @@ Route::get('/login', [FeedController::class, 'login'])->name('login');
 Route::get('/signin', [FeedController::class, 'signin'])->name('signin');
 
 
-Route::get('/post/{id}', [FeedController::class, 'post'])->name('post');
+
+Route::resource('posts', PostsController::class);

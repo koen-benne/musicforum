@@ -1,17 +1,18 @@
 @extends('app')
-@section('title', $post['title'])
+@section('title', $post->title)
 
 
 
 @section('content')
 
-    <main class="post">
+    <div class="post">
 
-        <h1>{{ $post['title'] }}</h1>
-        <p>{{ $post['author'] }}</p>
+        <h1>{{ $post->title }}</h1>
+        <p>{{ $post->user->name }}</p>
 
-        @include('inc.audioplayer', ['fileName' => $post['title']])
+        @include('inc.audioplayer', ['fileName' => $post->audio_file_name])
 
-    </main>
+    </div>
 
 @endsection
+
