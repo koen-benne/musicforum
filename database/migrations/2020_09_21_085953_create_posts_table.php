@@ -17,12 +17,9 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('title', 50)->unique();
             $table->string('audio_file_name', 50)->unique();
-            $table->string('description');
-            $table->timestamps();
-        });
-
-        Schema::table('posts', function (Blueprint $table) {
+            $table->text('description')->nullable();
             $table->foreignId('user_id')->constrained();
+            $table->timestamps();
         });
     }
 
