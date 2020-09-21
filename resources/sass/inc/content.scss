@@ -19,12 +19,14 @@
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    width: fit-content;
 }
 
-username {
+.username {
     padding: 4px 6px;
     background-color: v.$backgroundColor;
     border-radius: 15px;
+    border: 1px solid v.$backgroundColor;
 }
 
 .profile-picture {
@@ -34,3 +36,4 @@ username {
     height: 35px;
     margin-right: 5px;
 }
+

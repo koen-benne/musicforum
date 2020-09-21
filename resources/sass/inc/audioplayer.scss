@@ -11,6 +11,7 @@
     background-color: v.$backgroundColor;
     padding: 15px;
     border-radius: 10px;
+    border-color: v.$backgroundColor;
 }
 
 audiocontrolls {
@@ -27,6 +28,7 @@ audiocontrolls {
 }
 
 .play-button {
+    z-index: 1;
     margin-right: 10px;
     border-radius: 50%;
     padding: 0;
@@ -50,6 +52,7 @@ audiocontrolls {
 
 $timelineThickness: 10px;
 .timeline{
+    z-index: 1;
     flex-grow: 1;
     width: 400px;
     height: $timelineThickness;
@@ -58,8 +61,13 @@ $timelineThickness: 10px;
     border-radius: 15px;
 }
 
+.timeline:hover {
+    background-color: #cbcbcb;
+}
+
 $extraPlayheadThickness: 10px;
 .playhead{
+    z-index: 1;
     width: $timelineThickness + $extraPlayheadThickness;
     height: $timelineThickness + $extraPlayheadThickness;
     border-radius: 50%;

@@ -12,8 +12,8 @@ class FeedController extends Controller
     {
 
         $postList = [
-            ['username' => 'MinecraftGanster22', 'songTitle' => 'Big Tingz'],
-            ['username' => 'SuperSickGuy', 'songTitle' => 'Sick Beat'],
+            ['id' => 1, 'author' => 'CoolPerson22', 'title' => 'Big Tingz'],
+            ['id' => 2, 'author' => 'SuperSickGuy', 'title' => 'Sick Beat'],
         ];
 
         return view('home', ['postList' => $postList]);
@@ -31,6 +31,26 @@ class FeedController extends Controller
     {
 
         return view('home');
+
+    }
+
+    public function post($id) {
+
+        $postList = [
+            ['id' => 1, 'author' => 'CoolPerson22', 'title' => 'Big Tingz'],
+            ['id' => 2, 'author' => 'SuperSickGuy', 'title' => 'Sick Beat'],
+        ];
+
+        $post = null;
+
+        foreach ($postList as $currentPost) {
+            if ($currentPost['id'] == $id) {
+                $post = $currentPost;
+                break;
+            }
+        }
+
+        return view('post', ['post' => $post]);
 
     }
 

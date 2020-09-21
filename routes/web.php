@@ -18,3 +18,6 @@ Route::get('/', [FeedController::class, 'show'])->name('home');
 
 Route::get('/login', [FeedController::class, 'login'])->name('login');
 Route::get('/signin', [FeedController::class, 'signin'])->name('signin');
+
+
+Route::get('/post/{id}', [FeedController::class, 'post'])->name('post');
