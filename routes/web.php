@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,6 @@ Route::get('/', [FeedController::class, 'show'])->name('home');
 Route::get('/login', [FeedController::class, 'login'])->name('login');
 Route::get('/signin', [FeedController::class, 'signin'])->name('signin');
 
-
-
 Route::resource('posts', PostsController::class);
+
+Route::get('/users/{user}', [UsersController::class, 'show'])->name('user');
