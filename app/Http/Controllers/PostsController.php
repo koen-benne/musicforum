@@ -22,7 +22,7 @@ class PostsController extends Controller
         $postList = Post::all();
 
 
-        return view('posts', ['postList' => $postList]);
+        return view('posts.index', ['postList' => $postList]);
     }
 
     /**
@@ -56,7 +56,7 @@ class PostsController extends Controller
     {
         $post = Post::all()->find($id);
 
-        return view('post', ['post' => $post]);
+        return view('posts.show', ['post' => $post]);
     }
 
     /**

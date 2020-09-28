@@ -39,7 +39,7 @@ class FeedController extends Controller
 
         $post = Post::all()->find($id);
 
-        return view('post', ['post' => $post]);
+        return view('posts', ['posts' => $post]);
 
     }
 
