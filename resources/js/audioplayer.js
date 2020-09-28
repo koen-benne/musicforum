@@ -147,6 +147,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
     function dragPlayhead(event) {
+        document.body.classList.add('no-select');
+
         draggingPlayhead = event.target;
         const audioPlayer = draggingPlayhead.parentElement.parentElement.parentElement;
         const audio = audioPlayer.getElementsByTagName('audio')[0];
@@ -167,6 +169,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (audioPlayer.id === 'now-playing') {
             audio.addEventListener('timeupdate', syncPlayheadToAudio, false);
         }
+        document.body.classList.remove('no-select');
         draggingPlayhead = null;
     }
 

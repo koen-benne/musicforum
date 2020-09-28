@@ -1,0 +1,56 @@
+@use 'vars' as v;
+
+.form-container {
+    margin: 80px 20px 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form-header {
+    font-size: 25px;
+}
+
+.form-body {
+
+}
+
+.form-group {
+    margin: 20px 0;
+}
+
+.form-textbox {
+    border: 1px solid #949494;
+    border-radius: 5px;
+    font-size: 22px;
+    width: 500px;
+}
+
+.form-label {
+    font-size: 17px;
+}
+
+.form-submit {
+    background-color: #d9d9d9;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 17px;
+}
+
+.form-submit:hover {
+    background-color: #cdcdcd;
+}
+
+.form-submit:active {
+    background-color: #bababa;
+}
+
+.is-invalid {
+    background-color: #ffe6e6;
+}
+
+.invalid-feedback {
+    color: #e70000;
+}

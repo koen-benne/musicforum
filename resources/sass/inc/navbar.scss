@@ -1,6 +1,6 @@
 /* Add a black background color to the top navigation bar */
 #topnav {
-    padding: 6px 8px;
+    padding: 6px 0;
     display: flex;
     flex-direction: row;
     overflow: hidden;
@@ -9,24 +9,23 @@
 }
 
 /* Style the links inside the navigation bar */
-#topnav a {
+.nav-link {
     float: left;
     display: block;
     color: black;
     text-align: center;
     text-decoration: none;
     font-size: 17px;
-    width: 70px;
 }
 
 /* Change the color of links on hover */
-#topnav a:hover {
+.nav-link:hover {
     background-color: #ddd;
     color: black;
 }
 
 /* Style the "active" element to highlight the current page */
-#topnav a.active {
+.nav-link.active {
     background-color: black;
     color: white;
 }
@@ -36,10 +35,10 @@
     flex: 1;
     border: none;
     font-size: 17px;
-
 }
 
-#topnav a, input[type=text] {
+.nav-item {
+    margin: 0 4px;
     border-radius: 6px;
     padding: 10px;
 }
@@ -72,4 +71,47 @@
     #topnav input[type=text] {
         border: 1px solid #ccc;
     }
+}
+
+#topnav li {
+    list-style-type: none;
+}
+
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+}
+
+.dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-top: 6px;
+}
+
+/* Style the links inside the navigation bar */
+.dropdown-item {
+    z-index: 99;
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 10px;
+    background-color: #e9e9e9;
+}
+
+/* Change the color of links on hover */
+.dropdown-item:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Style the "active" element to highlight the current page */
+.dropdown-item.active {
+    background-color: black;
+    color: white;
 }

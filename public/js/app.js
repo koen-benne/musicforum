@@ -95,6 +95,8 @@
 
 __webpack_require__(/*! ./audioplayer */ "./resources/js/audioplayer.js");
 
+__webpack_require__(/*! ./topnav */ "./resources/js/topnav.js");
+
 /***/ }),
 
 /***/ "./resources/js/audioplayer.js":
@@ -244,6 +246,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   }
 
   function dragPlayhead(event) {
+    document.body.classList.add('no-select');
     draggingPlayhead = event.target;
     var audioPlayer = draggingPlayhead.parentElement.parentElement.parentElement;
     var audio = audioPlayer.getElementsByTagName('audio')[0];
@@ -267,6 +270,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       audio.addEventListener('timeupdate', syncPlayheadToAudio, false);
     }
 
+    document.body.classList.remove('no-select');
     draggingPlayhead = null;
   } // Synchronizes playhead position with current point in audio
 
@@ -297,6 +301,47 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   function getPlayingAudio() {
     return document.getElementById('now-playing');
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/topnav.js":
+/*!********************************!*\
+  !*** ./resources/js/topnav.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var topnav = document.getElementById('topnav');
+document.addEventListener('click', function (e) {
+  var target = e.target;
+
+  if (target.id === 'logout-button') {
+    e.preventDefault();
+    document.getElementById('frm-logout').submit();
+  }
+
+  var menus = document.getElementsByClassName('dropdown-menu');
+
+  if (target.classList.contains('dropdown-button')) {
+    for (var i = 0; i < menus.length; i++) {
+      var classList = menus[i].classList;
+
+      if (classList.contains('invisible')) {
+        classList.remove('invisible');
+      } else {
+        classList.add('invisible');
+      }
+    }
+  } else if (!target.classList.contains('dropdown-item')) {
+    for (var _i = 0; _i < menus.length; _i++) {
+      var _classList = menus[_i].classList;
+
+      if (!_classList.contains('invisible')) {
+        _classList.add('invisible');
+      }
+    }
   }
 });
 

@@ -1,7 +1,7 @@
 /* Add a black background color to the top navigation bar */
 
 #topnav {
-  padding: 6px 8px;
+  padding: 6px 0;
   display: flex;
   flex-direction: row;
   overflow: hidden;
@@ -11,26 +11,25 @@
 
 /* Style the links inside the navigation bar */
 
-#topnav a {
+.nav-link {
   float: left;
   display: block;
   color: black;
   text-align: center;
   text-decoration: none;
   font-size: 17px;
-  width: 70px;
 }
 
 /* Change the color of links on hover */
 
-#topnav a:hover {
+.nav-link:hover {
   background-color: #ddd;
   color: black;
 }
 
 /* Style the "active" element to highlight the current page */
 
-#topnav a.active {
+.nav-link.active {
   background-color: black;
   color: white;
 }
@@ -43,8 +42,8 @@
   font-size: 17px;
 }
 
-#topnav a,
-input[type=text] {
+.nav-item {
+  margin: 0 4px;
   border-radius: 6px;
   padding: 10px;
 }
@@ -82,6 +81,51 @@ input[type=text] {
   #topnav input[type=text] {
     border: 1px solid #ccc;
   }
+}
+
+#topnav li {
+  list-style-type: none;
+}
+
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+}
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-top: 6px;
+}
+
+/* Style the links inside the navigation bar */
+
+.dropdown-item {
+  z-index: 99;
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  font-size: 17px;
+  padding: 10px;
+  background-color: #e9e9e9;
+}
+
+/* Change the color of links on hover */
+
+.dropdown-item:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the "active" element to highlight the current page */
+
+.dropdown-item.active {
+  background-color: black;
+  color: white;
 }
 
 #content {
@@ -144,11 +188,11 @@ audiocontrolls {
 }
 
 .play {
-  background: #d7d7d7 url(/images/playbutton.png?e97126c887470030332bb84c20af4737) no-repeat center;
+  background: #e2e2e2 url(/images/playbutton.png?e97126c887470030332bb84c20af4737) no-repeat center;
 }
 
 .pause {
-  background: #d7d7d7 url(/images/pausebutton.png?78f43c88481bee28ebfbd47129896401) no-repeat center;
+  background: #e2e2e2 url(/images/pausebutton.png?78f43c88481bee28ebfbd47129896401) no-repeat center;
 }
 
 .play-button {
@@ -179,7 +223,7 @@ audiocontrolls {
   flex-grow: 1;
   width: 400px;
   height: 10px;
-  background: #d7d7d7;
+  background: #e2e2e2;
   float: left;
   border-radius: 15px;
 }
@@ -195,6 +239,57 @@ audiocontrolls {
   border-radius: 50%;
   margin-top: -5px;
   background: black;
+}
+
+.form-container {
+  margin: 80px 20px 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.form-header {
+  font-size: 25px;
+}
+
+.form-group {
+  margin: 20px 0;
+}
+
+.form-textbox {
+  border: 1px solid #949494;
+  border-radius: 5px;
+  font-size: 22px;
+  width: 500px;
+}
+
+.form-label {
+  font-size: 17px;
+}
+
+.form-submit {
+  background-color: #d9d9d9;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 17px;
+}
+
+.form-submit:hover {
+  background-color: #cdcdcd;
+}
+
+.form-submit:active {
+  background-color: #bababa;
+}
+
+.is-invalid {
+  background-color: #ffe6e6;
+}
+
+.invalid-feedback {
+  color: #e70000;
 }
 
 * {
@@ -240,5 +335,9 @@ audiocontrolls {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.invisible {
+  display: none;
 }
 

@@ -1,12 +1,18 @@
+// Variables
 @use 'inc/vars' as v;
 
 @use 'inc/navbar';
 @use 'inc/content';
 @use "inc/audioplayer";
+@use "inc/form";
 
 * {
     font-family: sans-serif;
     margin: 0;
+}
+
+app {
+
 }
 
 .link-block {
@@ -48,4 +54,8 @@
     left:0;
     width:100%;
     height:100%;
+}
+
+.invisible {
+    display: none;
 }

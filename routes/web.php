@@ -24,3 +24,7 @@ Route::get('/signin', [FeedController::class, 'signin'])->name('signin');
 Route::resource('posts', PostsController::class);
 
 Route::get('/users/{user}', [UsersController::class, 'show'])->name('user');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
