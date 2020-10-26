@@ -3,7 +3,10 @@
         <a class="nav-item nav-link" href=" {{ route('home') }} ">Home</a>
     </div>
     <div id="nav-middle">
-        <input class="nav-item" type="text" placeholder="Search..">
+        <form id="search-form" action="{{ route('search') }}" method="GET">
+            <input id="searchterm" class="nav-item" type="text" placeholder="Search..">
+            <button type="submit" id="search-button"></button>
+        </form>
     </div>
     <div id="nav-right">
         @guest
@@ -26,7 +29,7 @@
                         {{ __('Logout') }}
                     </a>
                     <a class="dropdown-item" href="{{ route('posts.create') }}">
-                        new post
+                        New Post
                     </a>
 
                     <form id="frm-logout" action="{{ route('logout') }}" method="POST">
