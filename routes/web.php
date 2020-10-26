@@ -3,6 +3,7 @@
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [FeedController::class, 'show'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/login', [FeedController::class, 'login'])->name('login');
 Route::get('/signin', [FeedController::class, 'signin'])->name('signin');
@@ -25,6 +26,8 @@ Route::resource('posts', PostsController::class);
 
 Route::get('/users/{user}', [UsersController::class, 'show'])->name('user');
 
+
+Route::get('/search', [SearchController::class, 'index'])->name('search');
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
