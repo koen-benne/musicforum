@@ -128,6 +128,25 @@
   color: white;
 }
 
+#search-form {
+  width: 100%;
+  display: flex;
+}
+
+#search-button {
+  background: url(https://a-v2.sndcdn.com/assets/images/search-dbfe5cbb.svg) 0 0 no-repeat;
+  width: 15px;
+  height: 15px;
+  border: none;
+  position: relative;
+  right: 35px;
+  top: 12.5px;
+}
+
+#search-button:focus {
+  outline: none;
+}
+
 #content {
   width: 100%;
 }
@@ -264,6 +283,20 @@ audiocontrolls {
   width: 500px;
 }
 
+.form-textarea {
+  border: 1px solid #949494;
+  border-radius: 5px;
+  font-size: 18px;
+  width: 500px;
+}
+
+.form-file {
+  border: 1px solid #949494;
+  border-radius: 5px;
+  font-size: 18px;
+  width: 500px;
+}
+
 .form-label {
   font-size: 17px;
 }
@@ -290,6 +323,10 @@ audiocontrolls {
 
 .invalid-feedback {
   color: #e70000;
+}
+
+textarea {
+  resize: none;
 }
 
 * {

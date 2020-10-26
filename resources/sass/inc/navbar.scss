@@ -115,3 +115,21 @@
     background-color: black;
     color: white;
 }
+
+#search-form {
+    width: 100%;
+    display: flex;
+}
+
+#search-button {
+    background: url(https://a-v2.sndcdn.com/assets/images/search-dbfe5cbb.svg) 0 0 no-repeat;
+    width: 15px;
+    height: 15px;
+    border: none;
+    position: relative;
+    right: 35px;
+    top: 12.5px;
+}
+#search-button:focus {
+    outline: none;
+}
