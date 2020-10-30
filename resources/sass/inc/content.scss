@@ -22,7 +22,7 @@
     width: fit-content;
 }
 
-.username {
+.username-1 {
     padding: 4px 6px;
     background-color: v.$backgroundColor;
     border-radius: 15px;
@@ -37,3 +37,19 @@
     margin-right: 5px;
 }
 
+.username-2 {
+    margin: 10px 0;
+    color: #4c4c4c;
+}
+
+.ap-container {
+    padding: 14px 14px 1px 14px;
+    background-color: v.$backgroundColor;
+    border-radius: 15px;
+}
+
+.comment-section {
+    margin: 15px 0 10px 0;
+    width: 900px;
+    font-size: 17px;
+}

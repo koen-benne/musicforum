@@ -11,8 +11,8 @@
 
     <article class="post">
         <div class="user-container link-container">
-            <img class="profile-picture" src="img/StandardProfile.png">
-            <p class="username">{{ $post->user->name }}</p>
+            <img class="profile-picture" src="{{ asset('img/StandardProfile.png') }}">
+            <p class="username-1">{{ $post->user->name }}</p>
         </div>
         <div class="song-container link-block">
             <a class="covering-link" href=" {{ route('posts.show', $post->id) }} "></a>

@@ -48,6 +48,7 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->middleware('auth');
 
         $request->validate([
             'title' => 'required|unique:posts|max:100',
@@ -92,11 +93,18 @@ class PostsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return Response
+     * @return Application|Factory|\Illuminate\Http\RedirectResponse|View
      */
     public function edit($id)
     {
-        //
+        $this->middleware('auth');
+
+        $post = Post::all()->find($id);
+        if ($post->user_id == Auth::id()) {
+            return view('posts.edit', ['post' => $post]);
+        } else {
+            return redirect()->route('posts.show', [$id]);
+        }
     }
 
     /**
@@ -104,21 +112,39 @@ class PostsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->middleware('auth');
+
+        $post = Post::all()->find($id);
+        if ($post->user_id == Auth::id()) {
+            $post->save();
+
+            return redirect()->route('posts.show', [$id]);
+        } else {
+            return redirect()->route('posts.show', [$id]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        //
+
+        $post = Post::all()->find($id);
+        if ($post->user_id == Auth::id()) {
+            $post->delete();
+
+            return redirect()->route('posts.index');
+        } else {
+
+            return redirect()->route('posts.show', [$id]);
+        }
     }
 }
