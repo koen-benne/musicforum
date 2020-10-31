@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UsersController;
@@ -28,6 +29,8 @@ Route::get('/users/{user}', [UsersController::class, 'show'])->name('user');
 
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
+
+Route::post('comments/store', [CommentsController::class, 'store'])->name('comments.store');
 
 Auth::routes();
 

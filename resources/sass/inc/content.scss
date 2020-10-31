@@ -1,5 +1,9 @@
 @use 'vars' as v;
 
+main {
+    padding-top: 52px;
+}
+
 #content {
     width: 100%;
 }
@@ -43,7 +47,7 @@
 }
 
 .ap-container {
-    padding: 14px 14px 1px 14px;
+    padding: 14px;
     background-color: v.$backgroundColor;
     border-radius: 15px;
 }
@@ -52,4 +56,29 @@
     margin: 15px 0 10px 0;
     width: 900px;
     font-size: 17px;
+}
+
+#comment-button {
+    background: url(https://a-v2.sndcdn.com/assets/images/search-dbfe5cbb.svg) 0 0 no-repeat;
+    width: 15px;
+    height: 15px;
+    border: none;
+    position: relative;
+    right: 35px;
+    top: 12.5px;
+}
+
+.description {
+    word-wrap: break-word;
+}
+
+.tags {
+    margin-bottom: 10px;
+}
+
+.tag {
+    font-size: 15px;
+    padding: 3px 5px;
+    background-color: v.$darkBackground;
+    border-radius: 10px;
 }

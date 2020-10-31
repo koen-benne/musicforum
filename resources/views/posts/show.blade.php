@@ -14,6 +14,14 @@
 
             <div class="ap-container">
                 @include('inc.audioplayer', ['fileName' => $post->audio_file_name])
+
+                <div class="tags">
+                    @foreach($post->tags as $tag)
+                        <a class="tag">{{ $tag->tagname }}</a>
+                    @endforeach
+                </div>
+
+                <p class="description">{{ $post->description }}</p>
             </div>
 
         </div>
@@ -32,13 +40,24 @@
         <div class="comment-section">
             <p>Comments</p>
 
-            <div class="user-container link-container">
-                <img class="profile-picture" src="{{ asset('img/StandardProfile.png') }}">
-                <p class="username-1">User</p>
-            </div>
-            <div class="song-container link-block">
-                <p>Content</p>
-            </div>
+            @if (Auth::check())
+                <form id="comment-form" action="{{ route('comments.store') }}" method="POST">
+                    @csrf
+                    <input id="content" name="content" class="nav-item" type="text" placeholder="Comment..">
+                    <input type="hidden" name="post_id" value="{{ $post->id }}" />
+                    <button type="submit" id="comment-button"></button>
+                </form>
+            @endif
+
+            @foreach($post->comments()->orderBy('created_at', 'desc')->get() as $comment)
+                <div class="user-container link-container">
+                    <img class="profile-picture" src="{{ asset('img/StandardProfile.png') }}">
+                    <p class="username-1">{{ $comment->user->name }}</p>
+                </div>
+                <div class="song-container link-block">
+                    <p>{{ $comment->content }}</p>
+                </div>
+            @endforeach
 
         </div>
     </div>

@@ -1,12 +1,14 @@
 /* Add a black background color to the top navigation bar */
 
 #topnav {
+  width: 100%;
+  position: fixed;
   padding: 6px 0;
   display: flex;
   flex-direction: row;
-  overflow: hidden;
   background-color: #e9e9e9;
   height: 40px;
+  z-index: 10;
 }
 
 /* Style the links inside the navigation bar */
@@ -147,6 +149,10 @@
   outline: none;
 }
 
+main {
+  padding-top: 52px;
+}
+
 #content {
   width: 100%;
 }
@@ -192,7 +198,7 @@
 }
 
 .ap-container {
-  padding: 14px 14px 1px 14px;
+  padding: 14px;
   background-color: #f1f1f1;
   border-radius: 15px;
 }
@@ -201,6 +207,31 @@
   margin: 15px 0 10px 0;
   width: 900px;
   font-size: 17px;
+}
+
+#comment-button {
+  background: url(https://a-v2.sndcdn.com/assets/images/search-dbfe5cbb.svg) 0 0 no-repeat;
+  width: 15px;
+  height: 15px;
+  border: none;
+  position: relative;
+  right: 35px;
+  top: 12.5px;
+}
+
+.description {
+  word-wrap: break-word;
+}
+
+.tags {
+  margin-bottom: 10px;
+}
+
+.tag {
+  font-size: 15px;
+  padding: 3px 5px;
+  background-color: #e2e2e2;
+  border-radius: 10px;
 }
 
 .song-container h2 {

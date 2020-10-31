@@ -19,6 +19,12 @@
             <h2>{{ $post->title }}</h2>
             @include('inc.audioplayer', ['fileName' => $post->audio_file_name])
 
+            <div class="tags">
+                @foreach($post->tags as $tag)
+                    <a class="tag">{{ $tag->tagname }}</a>
+                @endforeach
+            </div>
+
             <p class="description">{{ $post->description }}</p>
         </div>
 
