@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
 use Auth;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -22,10 +24,25 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $postList = Post::all();
+        $posts = Post::all();
 
 
-        return view('posts.index', ['postList' => $postList]);
+        return view('posts.index', ['posts' => $posts]);
+    }
+
+    /**
+     * Display search results
+     *
+     * @return Application|Factory|Response|View
+     */
+    public function search(Request $request)
+    {
+        $tags = Tag::all()->whereIn('id', $request->query('tags'));
+
+        $relations = DB::table('post_tag')->whereIn('tag_id', $tags->pluck('id'))->pluck('post_id');
+        $posts = Post::all()->whereIn('id', $relations);
+
+        return view('posts.search', ['posts' => $posts, 'tags' => $tags]);
     }
 
     /**
@@ -84,7 +101,7 @@ class PostsController extends Controller
      * @param int $id
      * @return Application|Factory|Response|View
      */
-    public function show(int $id)
+    public function show($id)
     {
         $post = Post::all()->find($id);
 
