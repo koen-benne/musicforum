@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Auth;
@@ -71,6 +72,7 @@ class PostsController extends Controller
         $post->description = $request->input('description');
         $post->user_id = Auth::id();
         $post->save();
+        $post->tags()->attach(1);
 
         return redirect()->route('posts.show', [$post->id]);
 
@@ -121,20 +123,17 @@ class PostsController extends Controller
         $post = Post::all()->find($id);
         if ($post->user_id == Auth::id()) {
             $post->save();
-
-            return redirect()->route('posts.show', [$id]);
-        } else {
-            return redirect()->route('posts.show', [$id]);
         }
+        return redirect()->route('posts.show', [$id]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
 
         $post = Post::all()->find($id);
@@ -144,7 +143,8 @@ class PostsController extends Controller
             return redirect()->route('posts.index');
         } else {
 
-            return redirect()->route('posts.show', [$id]);
+            return back();
         }
     }
+
 }
