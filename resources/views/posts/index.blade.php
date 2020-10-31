@@ -7,7 +7,7 @@
 
 <div class="post-container">
 
-    @foreach($postList as $post)
+    @foreach($posts as $post)
 
     <article class="post">
         <div class="user-container link-container">
@@ -21,7 +21,7 @@
 
             <div class="tags">
                 @foreach($post->tags as $tag)
-                    <a class="tag">{{ $tag->tagname }}</a>
+                    <a href="{{ route('search', ['tags[]' => 1]) }}" class="tag">{{ $tag->tagname }}</a>
                 @endforeach
             </div>
 

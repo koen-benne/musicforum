@@ -228,10 +228,46 @@ main {
 }
 
 .tag {
+  position: relative;
+  z-index: 10;
   font-size: 15px;
   padding: 3px 5px;
   background-color: #e2e2e2;
   border-radius: 10px;
+  text-decoration: none;
+  color: black;
+}
+
+.tag:hover {
+  background-color: #d6d6d6;
+}
+
+.search-tag {
+  display: inline-block;
+  font-size: 17px;
+  padding: 3px 5px;
+  background-color: #e2e2e2;
+  border-radius: 10px;
+}
+
+#search-info {
+  margin: 10px 0;
+  width: 900px;
+}
+
+#search-tags-container {
+  margin-left: 41px;
+}
+
+.add {
+  margin-left: 7px;
+  padding: 0;
+  outline: none;
+  background: url(/images/plusbutton.png?7c7e5926a4b78320fc9b1cdaf1ac165c) no-repeat center Transparent;
+  background-size: 100%;
+  height: 13px;
+  width: 13px;
+  border: none;
 }
 
 .song-container h2 {

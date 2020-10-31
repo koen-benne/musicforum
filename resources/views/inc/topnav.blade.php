@@ -5,6 +5,7 @@
     <div id="nav-middle">
         <form id="search-form" action="{{ route('search') }}" method="GET">
             <input id="searchterm" class="nav-item" type="text" placeholder="Search..">
+            <input type="hidden" id="tags" value="{{  ($tags ?? null) ? $tags->pluck('id') : '' }}">
             <button type="submit" id="search-button"></button>
         </form>
     </div>
