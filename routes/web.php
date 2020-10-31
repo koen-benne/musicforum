@@ -18,17 +18,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [PostsController::class, 'index'])->name('home');
 
 Route::get('/login', [FeedController::class, 'login'])->name('login');
 Route::get('/signin', [FeedController::class, 'signin'])->name('signin');
 
+Route::get('/posts/search', [PostsController::class, 'search'])->name('search');
 Route::resource('posts', PostsController::class);
 
 Route::get('/users/{user}', [UsersController::class, 'show'])->name('user');
-
-
-Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 Route::post('comments/store', [CommentsController::class, 'store'])->name('comments.store');
 
