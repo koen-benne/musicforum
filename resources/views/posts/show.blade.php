@@ -58,7 +58,7 @@
             @endif
 
             @foreach($post->comments()->orderBy('created_at', 'desc')->get() as $comment)
-                <a href="{{ route('users.show', $post->user->id) }}" class="user-container link-container">
+                <a href="{{ route('user', $post->user->id) }}" class="user-container link-container">
                     <img class="profile-picture" src="{{ asset('img/StandardProfile.png') }}">
                     <p class="username-1">{{ $comment->user->name }}</p>
                 </a>

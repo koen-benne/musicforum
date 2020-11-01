@@ -33,7 +33,7 @@
                     <a class="dropdown-item" href="{{ route('posts.create') }}">
                         New Post
                     </a>
-                    <a class="dropdown-item" href="{{ route('users.show', Auth::user()->id) }}">
+                    <a class="dropdown-item" href="{{ route('user', Auth::user()->id) }}">
                         Account
                     </a>
 

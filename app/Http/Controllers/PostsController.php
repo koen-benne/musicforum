@@ -50,17 +50,17 @@ class PostsController extends Controller
         $posts = null;
 
         if (count($tags) <= 0) {
-            $posts = Post::all();
+            $posts = Post::all()->sortByDesc('created_at');
         } else {
             $relations = DB::table('post_tag')->whereIn('tag_id', $tags->pluck('id'))->pluck('post_id');
-            $posts = Post::all()->whereIn('id', $relations)->whereIn('enabled', 1);
+            $posts = Post::all()->whereIn('id', $relations)->whereIn('enabled', 1)->sortByDesc('created_at');
         }
 
         $filteredPosts = null;
 
         if ($searchTerm) {
             foreach ($posts as $post) {
-                if (stripos($post->title, $searchTerm) !== false) {
+                if (stripos($post->title, $searchTerm) !== false || stripos($post->description, $searchTerm) !== false) {
                     $filteredPosts[] = $post;
                 }
             }

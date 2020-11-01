@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Auth;
 use http\Client\Curl\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -12,26 +13,6 @@ use Illuminate\View\View;
 
 class UsersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function search()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -45,30 +26,49 @@ class UsersController extends Controller
 
         $posts = Post::all()->whereIn('user_id', \Auth::user()->id);
 
-        return view('user', ['user' => $user, 'posts' => $posts]);
+        return view('users.show', ['user' => $user, 'posts' => $posts]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return Response
+     * @return Application|Factory|\Illuminate\Http\RedirectResponse|View
      */
     public function edit($id)
     {
-        //
+        $this->middleware('auth');
+
+        $user = \App\Models\User::all()->find($id);
+
+        if ($id == Auth::id() || (Auth::user()->is_admin ?? false)) {
+            return view('users.edit', ['user' => $user]);
+        } else {
+            return redirect()->route('user', [$id]);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->middleware('auth');
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        $user = Auth::user();
+        $user->name = $request->input('name');
+        $user->save();
+
+
+        return redirect()->route('user', [$id]);
     }
 
 }

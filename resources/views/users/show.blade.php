@@ -10,15 +10,16 @@
         <div class="post">
 
             <h1>{{ $user->name }}</h1>
+            <a href="{{ route('users.edit', $user->id) }}" >Edit acount</a>
 
         </div>
 
-        @if (Auth::user()->id == $user->id || (Auth::user()->is_admin ?? false))
+
 
         @foreach($posts as $post)
 
             <article class="post">
-                <a href="{{ route('users.show', $post->user->id) }}" class="user-container link-container">
+                <a href="{{ route('user', $post->user->id) }}" class="user-container link-container">
                     <img class="profile-picture" src="{{ asset('img/StandardProfile.png') }}">
                     <p class="username-1">{{ $post->user->name }}</p>
                 </a>
@@ -36,6 +37,7 @@
                     <p class="description">{{ $post->description }}</p>
                 </div>
 
+                @if (Auth::user()->id == $user->id || (Auth::user()->is_admin ?? false))
                 <form method="POST" action="{{ route('posts.visibility', $post->id) }}">
                     @csrf
                     @if ($post->enabled == 1)
@@ -45,11 +47,11 @@
                     @endif
                     <button id="{{ "post-" . $post->id . "-switch" }}" class="disable-button" type="submit"></button>
                 </form>
+                @endif
 
             </article>
 
         @endforeach
-        @endif
     </div>
 
 @endsection

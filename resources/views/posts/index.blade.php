@@ -10,7 +10,7 @@
     @foreach($posts as $post)
 
     <article class="post">
-        <a href="{{ route('users.show', $post->user->id) }}" class="user-container link-container">
+        <a href="{{ route('user', $post->user->id) }}" class="user-container link-container">
             <img class="profile-picture" src="{{ asset('img/StandardProfile.png') }}">
             <p class="username-1">{{ $post->user->name }}</p>
         </a>
