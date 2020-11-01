@@ -185,6 +185,7 @@ class PostsController extends Controller
 
         $post = Post::all()->find($id);
         if ($post->user_id == Auth::id() || (Auth::user()->is_admin ?? false)) {
+            $post->tags()->detach();
             $post->delete();
 
             return redirect()->route('posts.index');

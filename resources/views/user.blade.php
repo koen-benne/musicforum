@@ -13,7 +13,7 @@
 
         </div>
 
-        @if (Auth::user()->id == $user->id)
+        @if (Auth::user()->id == $user->id || (Auth::user()->is_admin ?? false))
 
         @foreach($posts as $post)
 
