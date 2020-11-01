@@ -23,14 +23,14 @@ class FeedController extends Controller
     public function login()
     {
 
-        return view('home');
+        return back();
 
     }
 
     public function signin()
     {
 
-        return view('home');
+        return back();
 
     }
 

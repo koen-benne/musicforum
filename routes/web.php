@@ -22,8 +22,10 @@ Route::get('/', [PostsController::class, 'index'])->name('home');
 
 Route::get('/login', [FeedController::class, 'login'])->name('login');
 Route::get('/signin', [FeedController::class, 'signin'])->name('signin');
+Route::get('/users/{id}', [UsersController::class, 'show'])->name('users.show');
 
 Route::get('/posts/search', [PostsController::class, 'search'])->name('search');
+Route::post('/posts/{post}', [PostsController::class, 'visibility'])->name('posts.visibility');
 Route::resource('posts', PostsController::class);
 
 Route::get('/users/{user}', [UsersController::class, 'show'])->name('user');

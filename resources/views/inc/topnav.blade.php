@@ -32,6 +32,9 @@
                     <a class="dropdown-item" href="{{ route('posts.create') }}">
                         New Post
                     </a>
+                    <a class="dropdown-item" href="{{ route('users.show', Auth::user()->id) }}">
+                        Account
+                    </a>
 
                     <form id="frm-logout" action="{{ route('logout') }}" method="POST">
                         @csrf

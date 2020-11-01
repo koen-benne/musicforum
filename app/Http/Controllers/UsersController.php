@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use http\Client\Curl\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -42,7 +43,9 @@ class UsersController extends Controller
     {
         $user = \App\Models\User::all()->find($id);
 
-        return view('user', ['user' => $user]);
+        $posts = Post::all()->whereIn('user_id', \Auth::user()->id);
+
+        return view('user', ['user' => $user, 'posts' => $posts]);
     }
 
     /**

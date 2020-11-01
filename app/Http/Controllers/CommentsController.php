@@ -25,11 +25,20 @@ class CommentsController extends Controller
             'content' => 'required|max:100'
         ]);
 
-        $comment = new Comment();
-        $comment->content = $request->input('content');
-        $comment->user_id = Auth::id();
-        $comment->post_id = $request->input('post_id');
-        $comment->save();
+        $user = Auth::user();
+
+        if ($user->points >= 1 || $user->is_admin) {
+            if (!$user->is_admin) {
+                $user->points -= 1;
+                $user->save();
+            }
+
+            $comment = new Comment();
+            $comment->content = $request->input('content');
+            $comment->user_id = Auth::id();
+            $comment->post_id = $request->input('post_id');
+            $comment->save();
+        }
 
         return back();
     }

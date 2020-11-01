@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title', 50)->unique();
             $table->string('audio_file_name', 50)->unique();
             $table->text('description')->nullable();
+            $table->boolean('enabled')->default('1');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

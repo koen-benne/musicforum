@@ -232,7 +232,7 @@ main {
   z-index: 10;
   font-size: 15px;
   padding: 3px 5px;
-  background-color: #e2e2e2;
+  background-color: #dedede;
   border-radius: 10px;
   text-decoration: none;
   color: black;
@@ -246,7 +246,7 @@ main {
   display: inline-block;
   font-size: 17px;
   padding: 3px 5px;
-  background-color: #e2e2e2;
+  background-color: #dedede;
   border-radius: 10px;
 }
 
@@ -270,6 +270,25 @@ main {
   border: none;
 }
 
+.disable-button {
+  position: relative;
+  overflow: hidden;
+  margin-left: 7px;
+  padding: 0;
+  outline: none;
+  height: 20px;
+  width: 20px;
+  background: #cacaca url(/images/plusbutton.png?7c7e5926a4b78320fc9b1cdaf1ac165c) no-repeat center;
+  background-size: 60%;
+  transform: rotate(45deg);
+  border: none;
+  border-radius: 50%;
+}
+
+.disable-button:hover {
+  background-color: #b7b7b7;
+}
+
 .song-container h2 {
   font-size: 19px;
   margin-bottom: 10px;
@@ -291,11 +310,11 @@ audiocontrolls {
 }
 
 .play {
-  background: #e2e2e2 url(/images/playbutton.png?e97126c887470030332bb84c20af4737) no-repeat center;
+  background: #dedede url(/images/playbutton.png?e97126c887470030332bb84c20af4737) no-repeat center;
 }
 
 .pause {
-  background: #e2e2e2 url(/images/pausebutton.png?78f43c88481bee28ebfbd47129896401) no-repeat center;
+  background: #dedede url(/images/pausebutton.png?78f43c88481bee28ebfbd47129896401) no-repeat center;
 }
 
 .play-button {
@@ -326,7 +345,7 @@ audiocontrolls {
   flex-grow: 1;
   width: 400px;
   height: 10px;
-  background: #e2e2e2;
+  background: #dedede;
   float: left;
   border-radius: 15px;
 }

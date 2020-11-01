@@ -24,7 +24,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::all()->whereIn('enabled', 1);
 
 
         return view('posts.index', ['posts' => $posts]);
@@ -40,7 +40,7 @@ class PostsController extends Controller
         $tags = Tag::all()->whereIn('id', $request->query('tags'));
 
         $relations = DB::table('post_tag')->whereIn('tag_id', $tags->pluck('id'))->pluck('post_id');
-        $posts = Post::all()->whereIn('id', $relations);
+        $posts = Post::all()->whereIn('id', $relations)->whereIn('enabled', 1);
 
         return view('posts.search', ['posts' => $posts, 'tags' => $tags]);
     }
@@ -70,7 +70,7 @@ class PostsController extends Controller
 
         $request->validate([
             'title' => 'required|unique:posts|max:100',
-            'file' => 'required|mimes:mpeg,wav|max:61440',
+            'file' => 'required|mimes:mpeg,wav|max:60000',
             'description' => 'max:500',
         ]);
 
@@ -90,6 +90,10 @@ class PostsController extends Controller
         $post->user_id = Auth::id();
         $post->save();
         $post->tags()->attach(1);
+
+        $user = Auth::user();
+        $user->points += 5;
+        $user->save();
 
         return redirect()->route('posts.show', [$post->id]);
 
@@ -119,7 +123,7 @@ class PostsController extends Controller
         $this->middleware('auth');
 
         $post = Post::all()->find($id);
-        if ($post->user_id == Auth::id()) {
+        if ($post->user_id == Auth::id() || Auth::user()->is_admin) {
             return view('posts.edit', ['post' => $post]);
         } else {
             return redirect()->route('posts.show', [$id]);
@@ -138,7 +142,7 @@ class PostsController extends Controller
         $this->middleware('auth');
 
         $post = Post::all()->find($id);
-        if ($post->user_id == Auth::id()) {
+        if ($post->user_id == Auth::id() || Auth::user()->is_admin) {
             $post->save();
         }
         return redirect()->route('posts.show', [$id]);
@@ -150,11 +154,11 @@ class PostsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(int $id)
+    public function destroy( $id)
     {
 
         $post = Post::all()->find($id);
-        if ($post->user_id == Auth::id()) {
+        if ($post->user_id == Auth::id() || Auth::user()->is_admin) {
             $post->delete();
 
             return redirect()->route('posts.index');
@@ -162,6 +166,24 @@ class PostsController extends Controller
 
             return back();
         }
+    }
+
+    public function visibility($post) {
+
+        $post = Post::all()->find($post);
+        $user = Auth::user();
+
+        if ($post->user_id == $user->id || $user->is_admin) {
+            if ($post->enabled) {
+                $post->enabled = 0;
+            } else {
+                $post->enabled = 1;
+            }
+            $post->save();
+        }
+
+        return back();
+
     }
 
 }
