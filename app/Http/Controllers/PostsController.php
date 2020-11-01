@@ -52,7 +52,6 @@ class PostsController extends Controller
      */
     public function create()
     {
-
         $this->middleware('auth');
 
         return view('posts.create');
@@ -72,6 +71,7 @@ class PostsController extends Controller
             'title' => 'required|max:100',
             'file' => 'required|mimes:mpeg,wav|max:60000',
             'description' => 'max:500',
+            'tags' => 'max:500',
         ]);
 
         $post = new Post();
@@ -89,7 +89,7 @@ class PostsController extends Controller
         $post->description = $request->input('description');
         $post->user_id = Auth::id();
         $post->save();
-        $post->tags()->attach(1);
+        $post->tags()->attach($this->getTagIds($request->input('tags')));
 
         $user = Auth::user();
         $user->points += 5;
@@ -123,7 +123,7 @@ class PostsController extends Controller
         $this->middleware('auth');
 
         $post = Post::all()->find($id);
-        if ($post->user_id == Auth::id() || Auth::user()->is_admin) {
+        if ($post->user_id == Auth::id() || (Auth::user()->is_admin ?? false)) {
             return view('posts.edit', ['post' => $post]);
         } else {
             return redirect()->route('posts.show', [$id]);
@@ -141,9 +141,34 @@ class PostsController extends Controller
     {
         $this->middleware('auth');
 
+        $request->validate([
+            'title' => 'required|max:100',
+            'file' => 'mimes:mpeg,wav|max:60000',
+            'description' => 'max:500',
+            'tags' => 'max:500',
+        ]);
+
         $post = Post::all()->find($id);
-        if ($post->user_id == Auth::id() || Auth::user()->is_admin) {
+
+        if ($post->user_id == Auth::id() || (Auth::user()->is_admin ?? false)) {
+
+            if ($request->input('file')) {
+
+                $fileName = null;
+
+                while ($fileName === null || file_exists(storage_path() . '/app/audio/' . $fileName)) {
+                    $fileName = time() . '_' . Str::random() . '.wav';
+                }
+
+                $request->file('file')->storeAs('audio', $fileName, 'public');
+
+                $post->audio_file_name = $fileName;
+            }
+            $post->title = $request->input('title');
+            $post->description = $request->input('description');
+            $post->user_id = Auth::id();
             $post->save();
+            $post->tags()->sync($this->getTagIds($request->input('tags')));
         }
         return redirect()->route('posts.show', [$id]);
     }
@@ -156,9 +181,10 @@ class PostsController extends Controller
      */
     public function destroy( $id)
     {
+        $this->middleware('auth');
 
         $post = Post::all()->find($id);
-        if ($post->user_id == Auth::id() || Auth::user()->is_admin) {
+        if ($post->user_id == Auth::id() || (Auth::user()->is_admin ?? false)) {
             $post->delete();
 
             return redirect()->route('posts.index');
@@ -168,22 +194,55 @@ class PostsController extends Controller
         }
     }
 
-    public function visibility($post) {
+    /**
+     * Change visibility
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function visibility($post)
+    {
+        $this->middleware('auth');
 
         $post = Post::all()->find($post);
         $user = Auth::user();
 
-        if ($post->user_id == $user->id || $user->is_admin) {
-            if ($post->enabled) {
-                $post->enabled = 0;
-            } else {
-                $post->enabled = 1;
+        if (Auth::check()) {
+            if ($post->user_id == $user->id || $user->is_admin) {
+                if ($post->enabled) {
+                    $post->enabled = 0;
+                } else {
+                    $post->enabled = 1;
+                }
+                $post->save();
             }
-            $post->save();
         }
 
         return back();
 
+    }
+
+    /**
+     * Function that gets the id's of the tags given and creates new tags if necessary
+     *
+     * @param string $tags
+     * @return array
+     */
+    private function getTagIds(string $tags) {
+        $tags = explode(',', str_replace(' ', '', strtolower($tags)));
+        $tagIds = [];
+
+        foreach ($tags as $tag) {
+            $tagFromDB = Tag::all()->whereIn('tagname', $tag)->first();
+
+            if (!$tagFromDB) {
+                $tagFromDB = new Tag();
+                $tagFromDB->tagname = ucfirst($tag);
+                $tagFromDB->save();
+            }
+            $tagIds[] = $tagFromDB->id;
+        }
+        return $tagIds;
     }
 
 }
