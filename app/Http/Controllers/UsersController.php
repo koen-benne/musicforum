@@ -41,7 +41,7 @@ class UsersController extends Controller
 
         $user = \App\Models\User::all()->find($id);
 
-        if ($id == Auth::id() || (Auth::user()->is_admin ?? false)) {
+        if ($id == Auth::id()) {
             return view('users.edit', ['user' => $user]);
         } else {
             return redirect()->route('user', [$id]);
@@ -64,8 +64,10 @@ class UsersController extends Controller
         ]);
 
         $user = Auth::user();
-        $user->name = $request->input('name');
-        $user->save();
+        if ($id == $user->id) {
+            $user->name = $request->input('name');
+            $user->save();
+        }
 
 
         return redirect()->route('user', [$id]);

@@ -10,7 +10,10 @@
         <div class="post">
 
             <h1>{{ $user->name }}</h1>
-            <a href="{{ route('users.edit', $user->id) }}" >Edit acount</a>
+
+            @if(Auth::id() == $user->id)
+                <a href="{{ route('users.edit', $user->id) }}" >Edit acount</a>
+            @endif
 
         </div>
 
