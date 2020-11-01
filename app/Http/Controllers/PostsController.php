@@ -69,7 +69,7 @@ class PostsController extends Controller
         $this->middleware('auth');
 
         $request->validate([
-            'title' => 'required|unique:posts|max:100',
+            'title' => 'required|max:100',
             'file' => 'required|mimes:mpeg,wav|max:60000',
             'description' => 'max:500',
         ]);

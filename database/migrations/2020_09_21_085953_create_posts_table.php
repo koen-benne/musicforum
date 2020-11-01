@@ -15,7 +15,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 50)->unique();
+            $table->string('title', 50);
             $table->string('audio_file_name', 50)->unique();
             $table->text('description')->nullable();
             $table->boolean('enabled')->default('1');
