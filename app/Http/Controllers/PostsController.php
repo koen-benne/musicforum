@@ -169,7 +169,7 @@ class PostsController extends Controller
 
         $request->validate([
             'title' => 'required|max:100',
-            'file' => 'mimes:mpeg,wav|max:60000',
+            'file' => 'sometimes|mimes:mpeg,wav|max:60000',
             'description' => 'max:500',
             'tags' => 'max:500',
         ]);
@@ -260,7 +260,7 @@ class PostsController extends Controller
         $tagIds = [];
 
         foreach ($tags as $tag) {
-            $tagFromDB = Tag::all()->whereIn('tagname', $tag)->first();
+            $tagFromDB = Tag::all()->whereIn('tagname', ucfirst($tag))->first();
 
             if (!$tagFromDB) {
                 $tagFromDB = new Tag();
