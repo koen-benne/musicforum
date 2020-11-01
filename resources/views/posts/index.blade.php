@@ -21,7 +21,11 @@
 
             <div class="tags">
                 @foreach($post->tags as $tag)
-                    <a href="{{ route('search', ['tags[]' => $tag->id]) }}" class="tag">{{ $tag->tagname }}</a>
+                    <form action="{{ route('search') }}" method="POST">
+                        @csrf
+                        <input type="hidden" value="{{ $tag->id }}" name="tags" id="tags" >
+                        <button type="submit" class="tag">{{ $tag->tagname }}</button>
+                    </form>
                 @endforeach
             </div>
 

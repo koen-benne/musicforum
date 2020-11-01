@@ -33,16 +33,42 @@ class PostsController extends Controller
     /**
      * Display search results
      *
+     * @param Request $request
      * @return Application|Factory|Response|View
      */
     public function search(Request $request)
     {
-        $tags = Tag::all()->whereIn('id', $request->query('tags'));
+        $request->validate([
+            'tags' => 'max:100',
+            'searchTerm' => 'max:100',
+        ]);
 
-        $relations = DB::table('post_tag')->whereIn('tag_id', $tags->pluck('id'))->pluck('post_id');
-        $posts = Post::all()->whereIn('id', $relations)->whereIn('enabled', 1);
+        $tags = Tag::all()->whereIn('id', json_decode($request->input('tags')));
 
-        return view('posts.search', ['posts' => $posts, 'tags' => $tags]);
+        $searchTerm = $request->input('searchTerm');
+
+        $posts = null;
+
+        if (count($tags) <= 0) {
+            $posts = Post::all();
+        } else {
+            $relations = DB::table('post_tag')->whereIn('tag_id', $tags->pluck('id'))->pluck('post_id');
+            $posts = Post::all()->whereIn('id', $relations)->whereIn('enabled', 1);
+        }
+
+        $filteredPosts = null;
+
+        if ($searchTerm) {
+            foreach ($posts as $post) {
+                if (stripos($post->title, $searchTerm) !== false) {
+                    $filteredPosts[] = $post;
+                }
+            }
+        } else {
+            $filteredPosts = $posts;
+        }
+
+        return view('posts.search', ['posts' => $filteredPosts, 'tags' => $tags, 'searchTerm' => $searchTerm]);
     }
 
     /**
@@ -60,7 +86,7 @@ class PostsController extends Controller
     /**
      * Store a newly created post in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
@@ -89,7 +115,7 @@ class PostsController extends Controller
         $post->description = $request->input('description');
         $post->user_id = Auth::id();
         $post->save();
-        $post->tags()->attach($this->getTagIds($request->input('tags')));
+        $post->tags()->attach($this->getTagIds($request->input('tags') ?? ''));
 
         $user = Auth::user();
         $user->points += 5;
@@ -133,7 +159,7 @@ class PostsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */

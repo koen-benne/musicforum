@@ -3,9 +3,10 @@
         <a class="nav-item nav-link" href=" {{ route('home') }} ">Home</a>
     </div>
     <div id="nav-middle">
-        <form id="search-form" action="{{ route('search') }}" method="GET">
-            <input id="searchterm" class="nav-item" type="text" placeholder="Search..">
-            <input type="hidden" id="tags" value="{{  ($tags ?? null) ? $tags->pluck('id') : '' }}">
+        <form id="search-form" action="{{ route('search') }}" method="POST">
+            @csrf
+            <input name="searchTerm" id="searchTerm" class="nav-item" type="text" placeholder="Search.." value="{{ $searchTerm ?? '' }}">
+            <input name="tags" id="tags" type="hidden" value="{{ isset($tags) ? json_encode($tags->pluck('id')) : '' }}">
             <button type="submit" id="search-button"></button>
         </form>
     </div>

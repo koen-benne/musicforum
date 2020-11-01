@@ -54,7 +54,7 @@
                 <label class="form-label" for="tags">Tags</label>
 
                 <div>
-                    <input id="tags" type="text" class="form-textbox @error('tags') is-invalid @enderror" name="tags" value="{{ old('tags') ?: implode(', ', $post->tags()->pluck('tagname')->all()) }}" required autocomplete="title" autofocus>
+                    <input name="tags" id="tags" type="text" class="form-textbox @error('tags') is-invalid @enderror" name="tags" value="{{ old('tags') ?: implode(', ', $post->tags()->pluck('tagname')->all()) }}" required autocomplete="title" autofocus>
 
                     @error('title')
                     <span class="invalid-feedback" role="alert">

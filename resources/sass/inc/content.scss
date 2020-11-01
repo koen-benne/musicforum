@@ -85,10 +85,21 @@ main {
     border-radius: 10px;
     text-decoration: none;
     color: black;
+    border: none;
 }
 
 .tag:hover {
     background-color: #d6d6d6;
+}
+
+.tag:active {
+    outline: none;
+    border: none;
+}
+
+.tag:focus {
+    background-color: #c8c8c8;
+    outline: none;
 }
 
 .search-tag {
