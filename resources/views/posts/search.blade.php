@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="post-container">
+    <a class="post-container">
         <div id="search-info">
             <div id="search-tags-container">
                 @foreach($tags as $tag)
@@ -18,10 +18,10 @@
         @foreach($posts as $post)
 
             <article class="post">
-                <div class="user-container link-container">
+                <a href="{{ route('users.show', $post->user->id) }}" class="user-container link-container">
                     <img class="profile-picture" src="{{ asset('img/StandardProfile.png') }}">
                     <p class="username-1">{{ $post->user->name }}</p>
-                </div>
+                </a>
                 <div class="song-container link-block">
                     <a class="covering-link" href=" {{ route('posts.show', $post->id) }} "></a>
                     <h2>{{ $post->title }}</h2>
@@ -29,7 +29,7 @@
 
                     <div class="tags">
                     @foreach($post->tags as $tag)
-                        <a href="{{ route('search', ['tags[]' => 1]) }}" class="tag">{{ $tag->tagname }}</a>
+                        <a href="{{ route('search', ['tags[]' => $tag->id]) }}" class="tag">{{ $tag->tagname }}</a>
                     @endforeach
                     </div>
 

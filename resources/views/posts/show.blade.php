@@ -17,7 +17,7 @@
 
                 <div class="tags">
                     @foreach($post->tags as $tag)
-                        <a class="tag">{{ $tag->tagname }}</a>
+                        <a class="tag" href="{{ route('search', ['tags[]' => $tag->id]) }}">{{ $tag->tagname }}</a>
                     @endforeach
                 </div>
 
@@ -27,7 +27,7 @@
         </div>
 
 
-        @if ($post->user_id == Auth::id() || Auth::user()->is_admin)
+        @if ($post->user_id == Auth::id() || (Auth::user()->is_admin ?? false))
             <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
 
             <form method="POST" action="{{ route('posts.destroy', $post->id) }}">
@@ -37,11 +37,11 @@
             </form>
         @endif
 
-        <div class="comment-section">
+        <a class="comment-section">
             <p>Comments</p>
 
             @if (Auth::check())
-                @if (Auth::user()->points < 1 || Auth::user()->is_admin)
+                @if (Auth::user()->points < 1 || (Auth::user()->is_admin ?? false))
                 <form id="comment-form" action="{{ route('comments.store') }}" method="POST">
                     @csrf
                     <input id="content" name="content" class="nav-item" type="text" placeholder="Comment..">
@@ -54,10 +54,10 @@
             @endif
 
             @foreach($post->comments()->orderBy('created_at', 'desc')->get() as $comment)
-                <div class="user-container link-container">
+                <a href="{{ route('users.show', $post->user->id) }}" class="user-container link-container">
                     <img class="profile-picture" src="{{ asset('img/StandardProfile.png') }}">
                     <p class="username-1">{{ $comment->user->name }}</p>
-                </div>
+                </a>
                 <div class="song-container link-block">
                     <p>{{ $comment->content }}</p>
                 </div>

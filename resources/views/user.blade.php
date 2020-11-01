@@ -18,10 +18,10 @@
         @foreach($posts as $post)
 
             <article class="post">
-                <div class="user-container link-container">
+                <a href="{{ route('users.show', $post->user->id) }}" class="user-container link-container">
                     <img class="profile-picture" src="{{ asset('img/StandardProfile.png') }}">
                     <p class="username-1">{{ $post->user->name }}</p>
-                </div>
+                </a>
                 <div class="song-container link-block">
                     <a class="covering-link" href=" {{ route('posts.show', $post->id) }} "></a>
                     <h2>{{ $post->title }}</h2>
@@ -39,11 +39,11 @@
                 <form method="POST" action="{{ route('posts.visibility', $post->id) }}">
                     @csrf
                     @if ($post->enabled == 1)
-                        <label>Disable</label>
+                        <label for="{{ "post-" . $post->id . "-switch" }}">Disable</label>
                     @else
-                        <label>Enable</label>
+                        <label for="{{ "post-" . $post->id . "-switch" }}">Enable</label>
                     @endif
-                    <button class="disable-button" type="submit"></button>
+                    <button id="{{ "post-" . $post->id . "-switch" }}" class="disable-button" type="submit"></button>
                 </form>
 
             </article>

@@ -40,9 +40,22 @@
                     <label class="form-label" for="description">Description</label>
 
                     <div>
-                        <textarea id="description" class="form-textarea @error('description') is-invalid @enderror"  rows="10" name="description" value="{{ old('description') }}" required autocomplete="description"></textarea>
+                        <textarea id="description" class="form-textarea @error('description') is-invalid @enderror"  rows="10" name="description" required autocomplete="description">{{ old('description') ?: $post->description }}</textarea>
 
                         @error('description')
+                        <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="tags">Tags</label>
+
+                    <div>
+                        <input id="tags" placeholder="put, tags, here" type="text" class="form-textbox @error('tags') is-invalid @enderror" name="tags" value="{{ old('tags') }}" required autocomplete="tags" autofocus>
+
+                        @error('tags')
                         <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
