@@ -26,7 +26,7 @@
 
             <div class="form-group">
 
-                <input id="file" type="file" class="form-file @error('title') is-invalid @enderror" name="file" value="{{  old('file') }}" required autocomplete="file" autofocus>
+                <input id="file" type="file" class="form-file @error('title') is-invalid @enderror" name="file" value="{{  old('file') }}" autocomplete="file" autofocus>
 
                 @error('file')
                 <span class="invalid-feedback" role="alert">
