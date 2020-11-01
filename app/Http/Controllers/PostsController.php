@@ -24,7 +24,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all()->whereIn('enabled', 1);
+        $posts = Post::all()->whereIn('enabled', 1)->sortByDesc('created_at');
 
 
         return view('posts.index', ['posts' => $posts]);
