@@ -253,6 +253,10 @@ main {
   outline: none;
 }
 
+.tag-form {
+  display: inline-block;
+}
+
 .search-tag {
   display: inline-block;
   font-size: 17px;

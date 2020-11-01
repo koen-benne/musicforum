@@ -34,7 +34,7 @@
 
                         <div class="tags">
                         @foreach($post->tags as $tag)
-                            <form action="{{ route('search') }}" method="POST">
+                            <form class="tag-form" action="{{ route('search') }}" method="POST">
                                 @csrf
                                 <input type="hidden" value="{{ $tag->id }}" name="tags" id="tags" >
                                 <button type="submit" class="tag">{{ $tag->tagname }}</button>
