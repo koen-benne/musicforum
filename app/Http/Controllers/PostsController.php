@@ -193,8 +193,9 @@ class PostsController extends Controller
             $post->title = $request->input('title');
             $post->description = $request->input('description');
             $post->user_id = Auth::id();
+            $post->enabled = 1;
             $post->save();
-            $post->tags()->sync($this->getTagIds($request->input('tags')));
+            $post->tags()->sync($this->getTagIds($request->input('tags') ?? ''));
         }
         return redirect()->route('posts.show', [$id]);
     }

@@ -7,8 +7,9 @@
     <div class="form-header">Edit Post</div>
 
     <div class="form-body">
-        <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('posts.update', $post->id) }}" enctype="multipart/form-data">
             @csrf
+            @method("PATCH")
 
             <div class="form-group">
                 <label class="form-label" for="title">Title</label>
@@ -54,7 +55,7 @@
                 <label class="form-label" for="tags">Tags</label>
 
                 <div>
-                    <input name="tags" id="tags" type="text" class="form-textbox @error('tags') is-invalid @enderror" name="tags" value="{{ old('tags') ?: implode(', ', $post->tags()->pluck('tagname')->all()) }}" required autocomplete="title" autofocus>
+                    <input name="tags" id="tags" type="text" class="form-textbox @error('tags') is-invalid @enderror" name="tags" value="{{ old('tags') ?: implode(', ', $post->tags()->pluck('tagname')->all()) }}" autocomplete="title" autofocus>
 
                     @error('title')
                     <span class="invalid-feedback" role="alert">
