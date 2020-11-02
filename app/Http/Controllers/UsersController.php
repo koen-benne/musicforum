@@ -23,8 +23,7 @@ class UsersController extends Controller
     public function show(int $id)
     {
         $user = \App\Models\User::all()->find($id);
-
-        $posts = Post::all()->whereIn('user_id', \Auth::user()->id);
+        $posts = Post::all()->whereIn('user_id', $user->id);
 
         return view('users.show', ['user' => $user, 'posts' => $posts]);
     }

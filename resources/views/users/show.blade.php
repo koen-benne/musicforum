@@ -39,8 +39,7 @@
 
                     <p class="description">{{ $post->description }}</p>
                 </div>
-
-                @if (Auth::user()->id == $user->id || (Auth::user()->is_admin ?? false))
+                @if (Auth::check() ? (Auth::user()->id == $user->id || (Auth::user()->is_admin ?? false)) : false)
                 <form method="POST" action="{{ route('posts.visibility', $post->id) }}">
                     @csrf
                     @if ($post->enabled == 1)

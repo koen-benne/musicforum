@@ -10,7 +10,7 @@
         <div class="post">
 
             <h1>{{ $post->title }}</h1>
-            <p class="username-2">{{ $post->user->name }}</p>
+            <a href="{{ route('user', $post->user->id) }}" class="username-2">{{ $post->user->name }}</a>
 
             <div class="ap-container">
                 @include('inc.audioplayer', ['fileName' => $post->audio_file_name])
@@ -46,15 +46,17 @@
 
             @if (Auth::check())
                 @if (Auth::user()->points < 1 || (Auth::user()->is_admin ?? false))
-                <form id="comment-form" action="{{ route('comments.store') }}" method="POST">
-                    @csrf
-                    <input id="content" name="content" class="nav-item" type="text" placeholder="Comment..">
-                    <input type="hidden" name="post_id" value="{{ $post->id }}" />
-                    <button type="submit" id="comment-button"></button>
-                </form>
+                    <form id="comment-form" action="{{ route('comments.store') }}" method="POST">
+                        @csrf
+                        <input id="content" name="content" class="nav-item" type="text" placeholder="Comment..">
+                        <input type="hidden" name="post_id" value="{{ $post->id }}" />
+                        <button type="submit" id="comment-button"></button>
+                    </form>
                 @else
-                    <p>You need more points to comment</p>
+                    <input id="content" name="content" class="nav-item" type="text" placeholder="You need more points to comment" readonly>
                 @endif
+            @else
+                <input id="content" name="content" class="nav-item" type="text" placeholder="Log in to comment" readonly>
             @endif
 
             @foreach($post->comments()->orderBy('created_at', 'desc')->get() as $comment)
